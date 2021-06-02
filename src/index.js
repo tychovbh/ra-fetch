@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Fetcher, {Router} from 'a-fetch'
+import Fetcher, {Router, Client} from 'a-fetch'
 import 'js-expansion'
 
 export const useIndex = (name, params = {}, records = []) => {
@@ -115,5 +115,5 @@ export const useLogout = (model = {}) => {
   ]
 }
 
-export {Router}
+export {Router, Client}
 export default Fetcher
