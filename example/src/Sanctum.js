@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Router, useLogin, useShow, useStore, useUpdate, useLogout, useIndex, useDelete} from 'ra-fetch'
+import {Router, useLogin, useShow, useStore, useUpdate, useLogout, useIndex, useDelete, useConfig} from 'ra-fetch'
 
 Router.baseURL('http://localhost:8000')
   .csrfURL('/sanctum/csrf-cookie')
