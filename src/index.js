@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import Fetcher, {Router, Client} from 'a-fetch'
-import 'js-expansion'
 
 export const useIndex = (name, params = {}, records = []) => {
   const [index, setIndex] = useState(Fetcher.collection())
