@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Fetcher, {Router, Client} from 'a-fetch'
 
-class Config  {
-  constructor(config) {
+class Config {
+  constructor() {
     this.Fetcher = Fetcher
   }
 
@@ -10,7 +10,7 @@ class Config  {
     const [index, setIndex] = useState(Fetcher.collection())
 
     useEffect(() => {
-      Fetcher.index(name, params, records).then(response => setIndex(response))
+      this.Fetcher.index(name, params, records).then(response => setIndex(response))
     }, [])
 
     return [index, data => setIndex({...index, data})]
@@ -20,18 +20,18 @@ class Config  {
     const [show, setShow] = useState(Fetcher.model())
 
     useEffect(() => {
-      Fetcher.show(name, params, records = [], key = 'id').then(response => setShow(response))
+      this.Fetcher.show(name, params, records = [], key = 'id').then(response => setShow(response))
     }, [])
 
     return [show, data => setShow({...show, data})]
   }
 
   store(name, model = {}, records = [], key = 'id') {
-    const [store, setStore] = useState({...Fetcher.model(), data: model})
+    const [store, setStore] = useState({...Fetcher.model(), loading: false, data: model})
 
     const submit = () => {
       setStore({...store, loading: true})
-      return Fetcher.store(name, store.data, records, key).then(response => {
+      return this.Fetcher.store(name, store.data, records, key).then(response => {
         setStore({...store, data: model, loading: false})
         return response
       })
@@ -40,20 +40,20 @@ class Config  {
     return [
       store,
       (data) => setStore({...store, data: {...store.data, ...data}}),
-      submit
+      submit,
     ]
   }
 
   update(name, params = {}, model = {}, records = [], key = 'id') {
-    const [update, setUpdate] = useState({...Fetcher.model(), data: model})
+    const [update, setUpdate] = useState({...Fetcher.model(), loading: false, data: model})
 
     useEffect(() => {
-      Fetcher.show(name, params).then(response => setUpdate(response))
+      this.Fetcher.show(name, params).then(response => setUpdate(response))
     }, [])
 
     const submit = () => {
       setUpdate({...update, loading: true})
-      return Fetcher.update(name, update.data, records, key).then(response => {
+      return this.Fetcher.update(name, update.data, records, key).then(response => {
         setUpdate({...update, loading: false})
         return response
       })
@@ -62,7 +62,7 @@ class Config  {
     return [
       update,
       (data) => setUpdate({...update, data: {...update.data, ...data}}),
-      submit
+      submit,
     ]
   }
 
@@ -71,7 +71,7 @@ class Config  {
 
     const submit = (submitParams = {}) => {
       setDestroy({loading: true})
-      return Fetcher.delete(name, submitParams, records, key).then(response => {
+      return this.Fetcher.delete(name, submitParams, records, key).then(response => {
         setDestroy({loading: false})
         return response
       })
@@ -79,16 +79,16 @@ class Config  {
 
     return [
       destroy,
-      submit
+      submit,
     ]
   }
 
   login(model) {
-    const [login, setLogin] = useState({...Fetcher.model(), data: model})
+    const [login, setLogin] = useState({...Fetcher.model(), loading: false, data: model})
 
     const submit = () => {
       setLogin({...login, loading: true})
-      return Fetcher.login(login.data).then(response => {
+      return this.Fetcher.login(login.data).then(response => {
         setLogin({...login, data: model, loading: false})
         return response
       })
@@ -97,16 +97,16 @@ class Config  {
     return [
       login,
       (data) => setLogin({...login, data: {...login.data, ...data}}),
-      submit
+      submit,
     ]
   }
 
   logout(model) {
-    const [logout, setLogout] = useState({...Fetcher.model(), data: model})
+    const [logout, setLogout] = useState({...Fetcher.model(), loading: false, data: model})
 
     const submit = () => {
       setLogout({...logout, loading: true})
-      return Fetcher.logout(logout.data).then(response => {
+      return this.Fetcher.logout(logout.data).then(response => {
         setLogout({...logout, data: model, loading: false})
         return response
       })
@@ -115,7 +115,7 @@ class Config  {
     return [
       logout,
       (data) => setLogout({...logout, data: {...logout.data, ...data}}),
-      submit
+      submit,
     ]
   }
 
