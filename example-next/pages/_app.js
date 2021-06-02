@@ -1,7 +1,7 @@
 import App, {Container} from 'next/app'
 import Head from 'next/head'
 import React from 'react'
-import store, {withApiStore, ApiStoreProvider} from 'rjfa'
+import store, {withApiStore, ApiStoreProvider} from 'ra-fetch'
 
 store.router.baseUrl('https://jsonplaceholder.typicode.com')
 store.router.index('/todos', 'todos', {wrap: true})

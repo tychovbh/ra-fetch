@@ -1,6 +1,6 @@
 {
-  "name": "rjfa-example",
-  "homepage": "https://tychovbh.github.io/rjfa",
+  "name": "ra-fetch-example",
+  "homepage": "https://tychovbh.github.io/ra-fetch",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "^4.0.3",
-    "rjfa": "link:.."
+    "ra-fetch": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",

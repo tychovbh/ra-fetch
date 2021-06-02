@@ -1,10 +1,10 @@
 {
-  "name": "rjfa",
+  "name": "ra-fetch",
   "version": "1.0.0",
   "description": "React hook to fetch API",
   "author": "tychovbh",
   "license": "MIT",
-  "repository": "https://github.com/tychovbh/rjfa",
+  "repository": "https://github.com/tychovbh/ra-fetch",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -63,8 +63,8 @@
     "dist"
   ],
   "dependencies": {
+    "a-fetch": "^1.0.0",
     "isomorphic-unfetch": "^3.0.0",
-    "jfa": "^1.0.0",
     "js-expansion": "^1.0.0",
     "qs": "^6.7.0"
   }
