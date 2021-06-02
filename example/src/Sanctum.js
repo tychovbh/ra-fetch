@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
 import {Router, useLogin, useShow, useStore, useUpdate, useLogout, useIndex, useDelete} from 'ra-fetch'
 
-Router.baseURL('http://localhost:8000', 'sanctum/csrf-cookie')
-  .loginUrl('login')
-  .logoutUrl('logout')
-
+Router.baseURL('http://localhost:8000')
+  .csrfURL('/sanctum/csrf-cookie')
+  .loginURL('/login')
+  .logoutURL('/logout')
+  // Category routes
   .index('categories', '/api/categories')
   .show('category', '/api/categories/{id}')
   .store('category', '/api/categories')
   .update('category', '/api/categories/{id}')
   .delete('category', '/api/categories/{id}')
-
+  // User routes
   .show('user', '/api/user')
 
 function StoreCategory({categories, setCategories}) {
