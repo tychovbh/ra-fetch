@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, useIndex, useShow, useStore} from 'ra-fetch'
+import {Router, useIndex, useShow, useStore, useRecords} from 'ra-fetch'
 
 Router.baseURL('https://jsonplaceholder.typicode.com')
   .index('todos', '/todos')
@@ -8,17 +8,19 @@ Router.baseURL('https://jsonplaceholder.typicode.com')
   .update('todo', '/todos/{id}')
 
 export default function App() {
-  const todos = useIndex('todos')
-  const todo = useShow('todo', {id: 1})
-  const [storeTodo, setStoreTodo, submitStoreTodo] = useStore('todo', {
-    title: '',
-    completed: false
-  })
+  const [todos, setTodos] = useIndex('todos')
+  const [todo] = useShow('todo', {id: 1})
+  const [storeTodo, setStoreTodo, submitStoreTodo] = useRecords(setTodos, todos.data)
+    .bearerToken('test')
+    .store('todo', {
+      title: '',
+      completed: false,
+    })
 
-  // const [updateTodo, setUpdateTodo, submitUpdateTodo] = useStore('todo', {
-  //   title: '',
-  //   completed: false
-  // })
+  const [updateTodo, setUpdateTodo, submitUpdateTodo] = useStore('todo', {
+    title: '',
+    completed: false,
+  })
 
   return <div>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>
@@ -55,7 +57,7 @@ export default function App() {
         />
       </div>
       <div>
-        <input type={'submit'} name={'submit'} value={todo.id ? 'edit' : 'create'} />
+        <input type={'submit'} name={'submit'} value={todo.id ? 'edit' : 'create'}/>
       </div>
     </form>
 
@@ -63,14 +65,14 @@ export default function App() {
     <p>Loading todos: {todos.loading ? 'true ' : 'false'}</p>
     <table>
       <thead>
-        <tr>
-          <th>ID</th>
-          <th style={{textAlign: 'left'}} colSpan={2}>Title</th>
-        </tr>
+      <tr>
+        <th>ID</th>
+        <th style={{textAlign: 'left'}} colSpan={2}>Title</th>
+      </tr>
       </thead>
       <tbody>
-        {
-          todos.data.map((item, index) => <tr key={index}>
+      {
+        todos.data.map((item, index) => <tr key={index}>
             <td>{item.id}</td>
             <td>{item.title || 'unknown'}</td>
             <td>
@@ -82,9 +84,9 @@ export default function App() {
               }}>delete
               </button>
             </td>
-          </tr>
-          )
-        }
+          </tr>,
+        )
+      }
       </tbody>
     </table>
     <button onClick={() => {
