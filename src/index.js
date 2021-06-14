@@ -61,7 +61,7 @@ class Config {
     const updateData = (data) => setUpdate({...update, data: {...update.data, ...data}})
 
     useEffect(() => {
-      this.Request.show(name, params).then(response => updateData(response))
+      this.Request.show(name, params).then(response => updateData(response.data))
     }, [])
 
     const submit = () => {

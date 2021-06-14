@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router, useIndex, useShow, useStore, useRecords} from 'ra-fetch'
+import {Router, useIndex, useShow, useUpdate, useRecords} from 'ra-fetch'
 
 Router.baseURL('https://jsonplaceholder.typicode.com')
   .index('todos', '/todos')
@@ -17,7 +17,7 @@ export default function App() {
       completed: false,
     })
 
-  const [updateTodo, setUpdateTodo, submitUpdateTodo] = useStore('todo', {
+  const [updateTodo, setUpdateTodo, submitUpdateTodo] = useUpdate('todo', {id: 1}, {
     title: '',
     completed: false,
   })
