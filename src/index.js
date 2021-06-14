@@ -58,9 +58,10 @@ class Config {
 
   update(name, params = {}, model = {}) {
     const [update, setUpdate] = useState({...Fetcher.model(), loading: false, data: model})
+    const updateData = (data) => setUpdate({...update, data: {...update.data, ...data}})
 
     useEffect(() => {
-      this.Request.show(name, params).then(response => setUpdate(response))
+      this.Request.show(name, params).then(response => updateData(response))
     }, [])
 
     const submit = () => {
@@ -78,7 +79,7 @@ class Config {
 
     return [
       update,
-      (data) => setUpdate({...update, data: {...update.data, ...data}}),
+      updateData,
       submit,
     ]
   }
