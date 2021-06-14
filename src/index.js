@@ -120,12 +120,12 @@ class Config {
   }
 
   api(api) {
-    this.Fetcher.api(api)
+    this.Fetcher = this.Fetcher.api(api)
     return this
   }
 
   bearerToken(bearer_token) {
-    this.Fetcher.bearerToken(bearer_token)
+    this.Fetcher = this.Fetcher.bearerToken(bearer_token)
     return this
   }
 }

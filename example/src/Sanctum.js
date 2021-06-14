@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Router, useLogin, useShow, useStore, useUpdate, useLogout, useIndex, useDelete, useConfig} from 'ra-fetch'
+import {Router, useLogin, useShow, useStore, useUpdate, useLogout, useIndex, useDelete, useBearerToken} from 'ra-fetch'
 
 Router.baseURL('http://localhost:8000')
   .csrfURL('/sanctum/csrf-cookie')
@@ -156,6 +156,7 @@ function Categories({categories, setCategory, setCategories}) {
 
 function App() {
   const [user] = useShow('user')
+  // const [user] = useBearerToken('').show('user')
   const [categories, setCategories] = useIndex('categories')
   const [category, setCategory] = useState({})
 
