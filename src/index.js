@@ -89,7 +89,7 @@ class Config {
 
     const submit = (submitParams = {}) => {
       setDestroy({loading: true})
-      return this.Request.delete(name, submitParams).then(response => {
+      return this.Request.delete(name, {...params, ...submitParams}).then(response => {
         setDestroy({loading: false})
 
         if (this.setRecords && response.records) {

@@ -2807,10 +2807,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-a-fetch@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.0.7.tgz#f3b6f5c5ff31bc9aefd9f8a20c208c0388f7d77c"
-  integrity sha512-yruklaIRhfBjpGKcYUtEdW9XkqQJVUoMi/5R4I/JWZ13Rct7Bd05BEah965kfTEpfnyKTB0SBDInizjkBqjORQ==
+a-fetch@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.0.8.tgz#0b5898ff148aff5b47f6e8beb1d1432f9372183c"
+  integrity sha512-xgHoRiAbRlZoMJMUa+PbrUUP5LgKy3ou+9l5IVeab6bXUsQHbibbaC+KX3WQfnNFlgjHf9784EDIzicySa6ofg==
   dependencies:
     axios "^0.21.1"
     js-expansion "^1.1.4"
