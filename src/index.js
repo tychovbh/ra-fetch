@@ -56,13 +56,15 @@ class Config {
     ]
   }
 
-  update(name, params = {}, model = {}) {
+  update(name, model = {}, params = {}) {
     const [update, setUpdate] = useState({...Fetcher.model(), loading: false, data: model})
     const updateData = (data) => setUpdate({...update, data: {...update.data, ...data}})
 
-    useEffect(() => {
-      this.Request.show(name, params).then(response => updateData(response.data))
-    }, [])
+    if (params !== {}) {
+      useEffect(() => {
+        this.Request.show(name, params).then(response => updateData(response.data))
+      }, [])
+    }
 
     const submit = () => {
       setUpdate({...update, loading: true})
