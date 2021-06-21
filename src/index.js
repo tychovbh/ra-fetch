@@ -60,7 +60,7 @@ class Config {
     const [update, setUpdate] = useState({...Fetcher.model(), loading: false, data: model})
     const updateData = (data) => setUpdate({...update, data: {...update.data, ...data}})
 
-    if (params !== {}) {
+    if (Object.keys(params).length) {
       useEffect(() => {
         this.Request.show(name, params).then(response => updateData(response.data))
       }, [])
@@ -185,8 +185,8 @@ export const useStore = (name, model = {}) => {
   return new Config().store(name, model)
 }
 
-export const useUpdate = (name, params = {}, model = {}) => {
-  return new Config().update(name, params, model)
+export const useUpdate = (name, model = {}, params = {}) => {
+  return new Config().update(name, model, params)
 }
 
 export const useDelete = (name, params = {}) => {

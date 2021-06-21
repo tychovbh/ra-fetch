@@ -17,10 +17,10 @@ export default function App() {
       completed: false,
     })
 
-  const [updateTodo, setUpdateTodo, submitUpdateTodo] = useUpdate('todo', {id: 1}, {
+  const [updateTodo, setUpdateTodo, submitUpdateTodo] = useUpdate('todo', {
     title: '',
     completed: false,
-  })
+  }, {id: 1})
 
   return <div>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>
