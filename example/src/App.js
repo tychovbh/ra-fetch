@@ -8,8 +8,7 @@ Router.baseURL('https://jsonplaceholder.typicode.com')
   .update('todo', '/todos/{id}')
 
 export default function App() {
-  const [todosParams, setTodosParams] = useState({userId: 1})
-  const [todos, setTodos] = useIndex('todos', todosParams, true)
+  const [todos, setTodos, setParams] = useIndex('todos', {userId: 1}, true)
   const [todo] = useShow('todo', {id: 1})
   const [storeTodo, setStoreTodo, submitStoreTodo] = useRecords(setTodos, todos.data)
     .bearerToken('test')
@@ -24,10 +23,9 @@ export default function App() {
     completed: false,
   }, {id: 1})
 
-  console.log(todos)
 
   return <div>
-    <button onClick={() => setTodosParams({userId: 2})}>todos users 2</button>
+    <button onClick={() => setParams({userId: 2})}>todos users 2</button>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>
     <p>Loading todo: {todo.loading ? 'true ' : 'false'}</p>
 

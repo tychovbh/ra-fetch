@@ -8,7 +8,7 @@ class Config {
   }
 
   index(name, params = {}, append = false) {
-    const dependencies = Object.keys(params).length ? [params] : []
+    const [indexParams, setIndexParams] = useState(params)
     const [index, setIndex] = useState(Fetcher.collection())
 
     useEffect(() => {
@@ -22,13 +22,13 @@ class Config {
           this.setRecords(response.records)
         }
       })
-    }, dependencies)
+    }, [indexParams])
 
-    return [index, data => setIndex({...index, data})]
+    return [index, data => setIndex({...index, data}), setIndexParams]
   }
 
   show(name, params = {}) {
-    const dependencies = Object.keys(params).length ? [params] : []
+    const [showParams, setShowParams] = useState(params)
     const [show, setShow] = useState(Fetcher.model())
 
     useEffect(() => {
@@ -39,9 +39,9 @@ class Config {
           this.setRecords(response.records)
         }
       })
-    }, dependencies)
+    }, [showParams])
 
-    return [show, data => setShow({...show, data})]
+    return [show, data => setShow({...show, data}), showParams]
   }
 
   store(name, model = {}) {
