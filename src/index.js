@@ -41,7 +41,7 @@ class Config {
       })
     }, [showParams])
 
-    return [show, data => setShow({...show, data}), showParams]
+    return [show, data => setShow({...show, data}), setShowParams]
   }
 
   store(name, model = {}) {
