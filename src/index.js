@@ -11,7 +11,7 @@ class Config {
     const [index, setIndex] = useState(Fetcher.collection())
 
     useEffect(() => {
-      this.Request.index(name, params, records).then(response => {
+      this.Request.index(name, params).then(response => {
         setIndex(response)
 
         if (this.setRecords && response.records) {
