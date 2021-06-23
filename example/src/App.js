@@ -23,7 +23,6 @@ export default function App() {
     completed: false,
   }, {id: 1})
 
-
   return <div>
     <button onClick={() => setParams({userId: 2})}>todos users 2</button>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Fetcher, {Router, Client} from 'a-fetch'
+import {get} from 'js-expansion'
 
 class Config {
   constructor() {
@@ -33,7 +34,7 @@ class Config {
     const [show, setShow] = useState(Fetcher.model())
 
     useEffect(() => {
-      setShow({...index, loading: true})
+      setShow({...show, loading: true})
       this.Request.show(name, showParams).then(response => {
         setShow(response)
 
@@ -69,13 +70,25 @@ class Config {
     ]
   }
 
-  update(name, model = {}, params = {}) {
+  update(name, model = {}, params = {}, mapping = {}) {
     const [update, setUpdate] = useState({...Fetcher.model(), loading: false, data: model})
     const updateData = (data) => setUpdate({...update, data: {...update.data, ...data}})
 
     if (Object.keys(params).length) {
       useEffect(() => {
-        this.Request.show(name, params).then(response => updateData(response.data))
+        this.Request.show(name, params).then(response => {
+          const data = {}
+
+          Object.keys(model).map((name) => {
+            if (mapping[name]) {
+              data[name] = get(response.data, mapping[name])
+            } else if (response.data.hasOwnProperty(name)) {
+              data[name] = response.data[name]
+            }
+          })
+
+          updateData(data)
+        })
       }, [])
     }
 
@@ -198,8 +211,8 @@ export const useStore = (name, model = {}) => {
   return new Config().store(name, model)
 }
 
-export const useUpdate = (name, model = {}, params = {}) => {
-  return new Config().update(name, model, params)
+export const useUpdate = (name, model = {}, params = {}, mapping = {}) => {
+  return new Config().update(name, model, params, mapping)
 }
 
 export const useDelete = (name, params = {}) => {
