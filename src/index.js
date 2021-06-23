@@ -7,23 +7,28 @@ class Config {
     this.setRecords = null
   }
 
-  index(name, params = {}) {
+  index(name, params = {}, append = false) {
+    const dependencies = Object.keys(params).length ? [params] : []
     const [index, setIndex] = useState(Fetcher.collection())
 
     useEffect(() => {
       this.Request.index(name, params).then(response => {
+        if (append) {
+          response.data = index.data.concat(response.data)
+        }
         setIndex(response)
 
         if (this.setRecords && response.records) {
           this.setRecords(response.records)
         }
       })
-    }, [params])
+    }, dependencies)
 
     return [index, data => setIndex({...index, data})]
   }
 
   show(name, params = {}) {
+    const dependencies = Object.keys(params).length ? [params] : []
     const [show, setShow] = useState(Fetcher.model())
 
     useEffect(() => {
@@ -34,7 +39,7 @@ class Config {
           this.setRecords(response.records)
         }
       })
-    }, [params])
+    }, dependencies)
 
     return [show, data => setShow({...show, data})]
   }
@@ -150,7 +155,7 @@ class Config {
     ]
   }
 
-  records(setRecords, records = [], key = 'id') {
+  records(setRecords = null, records = [], key = 'id') {
     this.setRecords = setRecords
     this.Request.records(records, key)
     return this
@@ -175,12 +180,12 @@ export const useBearerToken = (name) => {
   return new Config().bearerToken(name)
 }
 
-export const useRecords = (setRecords, records = [], key = 'id') => {
+export const useRecords = (setRecords = null, records = [], key = 'id') => {
   return new Config().records(setRecords, records, key)
 }
 
-export const useIndex = (name, params = {}, records = []) => {
-  return new Config().index(name, params, records)
+export const useIndex = (name, params = {}, append = false) => {
+  return new Config().index(name, params, append)
 }
 
 export const useShow = (name, params = {}) => {

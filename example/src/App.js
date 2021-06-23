@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Router, useIndex, useShow, useUpdate, useRecords} from 'ra-fetch'
 
 Router.baseURL('https://jsonplaceholder.typicode.com')
@@ -8,7 +8,8 @@ Router.baseURL('https://jsonplaceholder.typicode.com')
   .update('todo', '/todos/{id}')
 
 export default function App() {
-  const [todos, setTodos] = useIndex('todos')
+  const [todosParams, setTodosParams] = useState({userId: 1})
+  const [todos, setTodos] = useIndex('todos', todosParams, true)
   const [todo] = useShow('todo', {id: 1})
   const [storeTodo, setStoreTodo, submitStoreTodo] = useRecords(setTodos, todos.data)
     .bearerToken('test')
@@ -23,9 +24,10 @@ export default function App() {
     completed: false,
   }, {id: 1})
 
-  console.log(storeTodo)
+  console.log(todos)
 
   return <div>
+    <button onClick={() => setTodosParams({userId: 2})}>todos users 2</button>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>
     <p>Loading todo: {todo.loading ? 'true ' : 'false'}</p>
 
