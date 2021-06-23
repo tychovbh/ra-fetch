@@ -12,6 +12,7 @@ class Config {
     const [index, setIndex] = useState(Fetcher.collection())
 
     useEffect(() => {
+      setIndex({...index, loading: true})
       this.Request.index(name, indexParams).then(response => {
         if (append) {
           response.data = index.data.concat(response.data)
@@ -32,6 +33,7 @@ class Config {
     const [show, setShow] = useState(Fetcher.model())
 
     useEffect(() => {
+      setShow({...index, loading: true})
       this.Request.show(name, showParams).then(response => {
         setShow(response)
 
