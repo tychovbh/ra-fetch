@@ -4,7 +4,7 @@ import {Router, useIndex, useShow, useUpdate, useRecords} from 'ra-fetch'
 Router.baseURL('https://jsonplaceholder.typicode.com')
   .index('todos', '/todos')
   .show('todo', '/todos/{id}')
-  .store('todo', '/todos')
+  .store('todo', '/todos', {form_data: true})
   .update('todo', '/todos/{id}')
 
 export default function App() {
@@ -15,12 +15,15 @@ export default function App() {
     .store('todo', {
       title: '',
       completed: false,
+      thumbnail: null
     })
 
   const [updateTodo, setUpdateTodo, submitUpdateTodo] = useUpdate('todo', {
     title: '',
     completed: false,
   }, {id: 1})
+
+  console.log(storeTodo)
 
   return <div>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>
@@ -55,6 +58,9 @@ export default function App() {
           onChange={(value) => setStoreTodo({completed: value.target.checked})}
           value={storeTodo.data.completed}
         />
+      </div>
+      <div>
+        <input type="file" onChange={event => setStoreTodo({thumbnail: event.target.files[0]})}/>
       </div>
       <div>
         <input type={'submit'} name={'submit'} value={todo.id ? 'edit' : 'create'}/>

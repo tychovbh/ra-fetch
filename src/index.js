@@ -7,12 +7,18 @@ class Config {
     this.setRecords = null
   }
 
-  index(name, params = {}, records = []) {
+  index(name, params = {}) {
     const [index, setIndex] = useState(Fetcher.collection())
 
     useEffect(() => {
-      this.Request.index(name, params, records).then(response => setIndex(response))
-    }, [])
+      this.Request.index(name, params, records).then(response => {
+        setIndex(response)
+
+        if (this.setRecords && response.records) {
+          this.setRecords(response.records)
+        }
+      })
+    }, [params])
 
     return [index, data => setIndex({...index, data})]
   }
@@ -28,7 +34,7 @@ class Config {
           this.setRecords(response.records)
         }
       })
-    }, [])
+    }, [params])
 
     return [show, data => setShow({...show, data})]
   }
@@ -36,9 +42,9 @@ class Config {
   store(name, model = {}) {
     const [store, setStore] = useState({...Fetcher.model(), loading: false, data: model})
 
-    const submit = () => {
+    const submit = (submitParams = {}) => {
       setStore({...store, loading: true})
-      return this.Request.store(name, store.data).then(response => {
+      return this.Request.store(name, {...update.data, ...submitParams}).then(response => {
         setStore({...store, data: model, loading: false})
 
         if (this.setRecords && response.records) {
@@ -66,9 +72,9 @@ class Config {
       }, [])
     }
 
-    const submit = () => {
+    const submit = (submitParams = {}) => {
       setUpdate({...update, loading: true})
-      return this.Request.update(name, update.data).then(response => {
+      return this.Request.update(name, {...update.data, ...submitParams}).then(response => {
         setUpdate({...update, loading: false})
 
         if (this.setRecords && response.records) {

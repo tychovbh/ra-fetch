@@ -63,6 +63,6 @@
     "dist"
   ],
   "dependencies": {
-    "a-fetch": "^1.1.1"
+    "a-fetch": "^1.1.3"
   }
 }
