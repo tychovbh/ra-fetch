@@ -53,7 +53,7 @@ class Config {
     const submit = (submitParams = {}) => {
       setStore({...store, loading: true})
       return this.Request.store(name, {...store.data, ...submitParams}).then(response => {
-        setStore({...store, ...response, data: model, loading: false})
+        setStore({...store, ...response, data: response.errors.length ? store.data : model, loading: false})
 
         if (this.setRecords && response.records) {
           this.setRecords(response.records)
