@@ -3,8 +3,8 @@ import Fetcher, {Router, Client} from 'a-fetch'
 import {get} from 'js-expansion'
 
 class Config {
-  constructor() {
-    this.Request = Fetcher.request()
+  constructor(api) {
+    this.Request = api ? Fetcher.api(api) : Fetcher.request()
     this.setRecords = null
   }
 
@@ -188,7 +188,7 @@ class Config {
 }
 
 export const useApi = (name) => {
-  return new Config().api(name)
+  return new Config(name)
 }
 
 export const useBearerToken = (name) => {
