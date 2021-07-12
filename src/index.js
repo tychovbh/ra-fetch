@@ -19,7 +19,7 @@ class Config {
 
         useEffect(() => {
             setIndex({...index, loading: true})
-            this.Request.index(name, indexParams).then(response => {
+            this.Request.index(name, indexParams.params).then(response => {
                 if (append && indexParams.append) {
                     response.data = index.data.concat(response.data)
                 }
@@ -29,7 +29,7 @@ class Config {
                     this.setRecords(response.records)
                 }
             })
-        }, [indexParams])
+        }, [indexParams.params])
 
         return [index, data => setIndex({...index, data}), (params, append) => setIndexParams({params, append})]
     }
