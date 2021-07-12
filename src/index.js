@@ -9,20 +9,21 @@ class Config {
         this.setRecords = null
     }
 
-    index(name, params = {}, append = false)
+    index(name, params = {})
     {
         const [indexParams, setIndexParams] = useState({
             params,
-            append: append
+            append: false
         })
         const [index, setIndex] = useState(Fetcher.collection())
 
         useEffect(() => {
             setIndex({...index, loading: true})
             this.Request.index(name, indexParams.params).then(response => {
-                if (append && indexParams.append) {
+                if (indexParams.append) {
                     response.data = index.data.concat(response.data)
                 }
+
                 setIndex(response)
 
                 if (this.setRecords && response.records) {
@@ -31,7 +32,11 @@ class Config {
             })
         }, [indexParams.params])
 
-        return [index, data => setIndex({...index, data}), (params, append) => setIndexParams({params, append})]
+        return [
+            index,
+            data => setIndex({...index, data}),
+            (params, append = false) => setIndexParams({params, append})
+        ]
     }
 
     show(name, params = {})
@@ -213,8 +218,8 @@ export const useRecords = (setRecords = null, records = [], key = 'id') => {
     return new Config().records(setRecords, records, key)
 }
 
-export const useIndex = (name, params = {}, append = false) => {
-    return new Config().index(name, params, append)
+export const useIndex = (name, params = {}) => {
+    return new Config().index(name, params)
 }
 
 export const useShow = (name, params = {}) => {
