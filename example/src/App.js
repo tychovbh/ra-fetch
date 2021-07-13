@@ -24,7 +24,7 @@ export default function App() {
   }, {id: 1})
 
   return <div>
-    <button onClick={() => setParams({userId: 2})}>todos users 2</button>
+    <button onClick={() => setParams({userId: 2}, true)}>todos users 2</button>
     <p><strong>Todo with ID 1: {todo.data.title}</strong></p>
     <p>Loading todo: {todo.loading ? 'true ' : 'false'}</p>
 
