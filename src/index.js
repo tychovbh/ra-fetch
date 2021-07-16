@@ -34,7 +34,8 @@ class Config {
         return [
             index,
             data => setIndex({...index, data}),
-            (params, append = false) => setIndexParams({params, append})
+            indexParams,
+            (params, append = false) => setIndexParams({params, append}),
         ]
     }
 
@@ -53,7 +54,7 @@ class Config {
             })
         }, [showParams])
 
-        return [show, data => setShow({...show, data}), setShowParams]
+        return [show, data => setShow({...show, data}), showParams, setShowParams]
     }
 
     store(name, model = {}) {
