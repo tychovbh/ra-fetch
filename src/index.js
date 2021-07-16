@@ -34,7 +34,7 @@ class Config {
         return [
             index,
             data => setIndex({...index, data}),
-            indexParams,
+            indexParams.params,
             (params, append = false) => setIndexParams({params, append}),
         ]
     }
