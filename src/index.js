@@ -7,16 +7,23 @@ class Config {
         this.Request = api ? Fetcher.api(api) : Fetcher.request()
         this.setRecords = null
         this._mapping = {}
+        this._data = null
     }
 
     index(name, params = {}) {
         const [indexParams, setIndexParams] = useState({
             params,
-            append: false
+            append: false,
+            skip: !!this._data,
         })
-        const [index, setIndex] = useState(Fetcher.collection())
+        const [index, setIndex] = useState({...Fetcher.collection(), data: this._data || Fetcher.collection().data})
 
         useEffect(() => {
+            console.log('here', indexParams, this._data)
+            if (indexParams.skip) {
+                return
+            }
+
             setIndex({...index, loading: true})
             this.Request.index(name, indexParams.params).then(response => {
                 if (indexParams.append) {
@@ -29,13 +36,14 @@ class Config {
                     this.setRecords(response.records)
                 }
             })
+
         }, [indexParams.params])
 
         return [
             index,
             data => setIndex({...index, data}),
             indexParams.params,
-            (params, append = false) => setIndexParams({params, append}),
+            (params, append = false) => setIndexParams({params, append, skip: false}),
         ]
     }
 
@@ -74,9 +82,9 @@ class Config {
         }
 
         return [
-        store,
-        (data) => setStore({...store, data: {...store.data, ...data}}),
-        submit,
+            store,
+            (data) => setStore({...store, data: {...store.data, ...data}}),
+            submit,
         ]
     }
 
@@ -121,9 +129,9 @@ class Config {
         }
 
         return [
-          update,
-          updateData,
-          submit,
+            update,
+            updateData,
+            submit,
         ]
     }
 
@@ -144,8 +152,8 @@ class Config {
         }
 
         return [
-        destroy,
-        submit,
+            destroy,
+            submit,
         ]
     }
 
@@ -179,10 +187,15 @@ class Config {
         }
 
         return [
-        logout,
-        (data) => setLogout({...logout, data: {...logout.data, ...data}}),
-        submit,
+            logout,
+            (data) => setLogout({...logout, data: {...logout.data, ...data}}),
+            submit,
         ]
+    }
+
+    data(data) {
+        this._data = data
+        return this
     }
 
     records(setRecords = null, records = [], key = 'id') {
@@ -217,6 +230,10 @@ export const useBearerToken = (name) => {
 
 export const useRecords = (setRecords = null, records = [], key = 'id') => {
     return new Config().records(setRecords, records, key)
+}
+
+export const useData = (data) => {
+    return new Config().data(data)
 }
 
 export const useMapping = (mapping = {}) => {
