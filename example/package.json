@@ -1,35 +1,30 @@
 {
   "name": "ra-fetch-example",
-  "homepage": "https://tychovbh.github.io/ra-fetch",
+  "homepage": ".",
   "version": "0.0.0",
-  "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
+    "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
+    "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
+    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
+  },
   "dependencies": {
-    "prop-types": "^15.6.2",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "link:../node_modules/react-scripts",
     "ra-fetch": "link:.."
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^1.6.1"
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

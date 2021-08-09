@@ -1,125 +1,40 @@
-import React, {useState} from 'react'
-import {useApiStore} from 'ra-fetch'
+import {useState, useEffect} from 'react'
+import styles from '../styles/Home.module.css'
+import {Fetcher, useData} from 'ra-fetch'
 
-const Todos = () => {
-    const {state, dispatch} = useApiStore()
-    const [todo, setTodo] = useState({title: '', completed: false, userId: 1})
+export default function Home({data}) {
+    const [image, setImage] = useState()
 
+    const [posts] = useData(data.data).index('posts')
+
+    console.log(posts)
+
+    // useEffect(() => {
+    //     Fetcher.api('placeholder').index('posts').then(response => {
+    //         console.log(response)
+    //     })
+    // }, [])
+    // console.log(image)
     return (
-      <div>
-          <p><strong>User with ID 1: {state.user.id} Name: {state.user.name || 'unknown'}</strong></p>
-          <button onClick={() => {
-                dispatch({
-                    method: 'setState',
-                    name: 'user',
-                    value: {...state.user, name: 'Piet'}
-                })
-          }}>
-              name user Piet
-          </button>
+        <div className={styles.container}>
+            <button onClick={() => {
+                Fetcher.api('sanctum').store('categories', {
+                    name: 'test',
+                    image
+                }).then(response => console.log(response))
+            }}>store</button>
 
-          <p><strong>Todo with ID 1: {state.todo.data.title}</strong></p>
-          <p>Loading todo: {state.todo.loading ? 'true ' : 'false'}</p>
-
-          <p><strong>{todo.id ? 'Edit' : 'Create'} Todo:</strong></p>
-          <form onSubmit={(event) => {
-              event.preventDefault()
-              dispatch({
-                  method: todo.id ? 'put' : 'post',
-                  route: 'todos',
-                  params: todo,
-              })
-          }}>
-              <div>
-                  <label htmlFor={'title'}>Title</label>
-
-                  <input
-                    type={'text'}
-                    name={'title'}
-                    id={'title'}
-                    onChange={(value) => setTodo({...todo, title: value.target.value})}
-                    value={todo.title}/>
-              </div>
-
-              <div>
-                  <label htmlFor={'completed'}>Completed</label>
-
-                  <input
-                    type={'checkbox'}
-                    name={'completed'}
-                    id={'completed'}
-                    onChange={(value) => setTodo({...todo, completed: value.target.checked})}
-                    value={todo.completed}/>
-              </div>
-              <div>
-                  <input type={'submit'} name={'submit'} value={todo.id ? 'edit' : 'create'}/>
-              </div>
-          </form>
-
-          <p><strong>Todos:</strong></p>
-          <p>Loading todos: {state.todos.loading ? 'true ' : 'false'}</p>
-          <table>
-              <thead>
-              <tr>
-                  <th>ID</th>
-                  <th style={{textAlign: 'left'}} colSpan={2}>Title</th>
-              </tr>
-              </thead>
-              <tbody>
-              {
-                  state.todos.data.map((item, index) => <tr key={index}>
-                        <td>{item.id}</td>
-                        <td>{item.title || 'unknown'}</td>
-                        <td>
-                            <button onClick={() => setTodo(item)}>edit</button>
-                        </td>
-                        <td>
-                            <button onClick={() => dispatch({
-                                method: 'delete',
-                                route: 'todos',
-                                params: {
-                                    id: item.id
-                                }
-                            })}>delete
-                            </button>
-                        </td>
-                    </tr>
-                  )
-              }
-              </tbody>
-          </table>
-          <button onClick={() => {
-              dispatch({
-                  method: 'index',
-                  type: 'append',
-                  route: 'todos'
-              })
-          }}>load more
-          </button>
-      </div>
+            <input type="file" onChange={event => {
+                setImage(event.target.files[0])
+            }}/>
+        </div>
     )
 }
 
-Todos.getInitialProps = async ({store}) => {
-    const todos = await store.dispatch({
-        method: 'index',
-        route: 'todos'
-    })
+Home.getInitialProps = async () => {
+    const data = await Fetcher.api('placeholder').index('posts')
 
-    const todo = await store.dispatch({
-        method: 'show',
-        route: 'todo',
-        params: {
-            id: 1
-        }
-    })
-
-    const user = {
-        id: 1
+    return {
+        data: data,
     }
-
-    store.setState('user', user)
-    return {todos, todo, user}
 }
-
-export default Todos
