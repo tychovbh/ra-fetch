@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import Fetcher, {Router, Client} from 'a-fetch'
+import {Fetcher, Router, Client} from 'a-fetch'
 import {get} from 'js-expansion'
 
 class Config {
