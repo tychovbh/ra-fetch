@@ -162,7 +162,7 @@ class Config {
     const submit = () => {
       setLogin({...login, loading: true})
       return this.Request.login(login.data).then(response => {
-        setLogin({...login, data: model, loading: false})
+        setLogin({...login, ...response, data: model, loading: false})
         return response
       })
     }
@@ -180,7 +180,7 @@ class Config {
     const submit = () => {
       setLogout({...logout, loading: true})
       return this.Request.logout(logout.data).then(response => {
-        setLogout({...logout, data: model, loading: false})
+        setLogout({...logout, ...response, data: model, loading: false})
         return response
       })
     }
@@ -267,4 +267,4 @@ export const useLogout = (model = {}) => {
   return new Config().logout(model)
 }
 
-export { Fetcher, Router, Client};
+export {Fetcher, Router, Client}
