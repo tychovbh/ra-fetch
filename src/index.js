@@ -162,7 +162,8 @@ class Config {
     const submit = () => {
       setLogin({...login, loading: true})
       return this.Request.login(login.data).then(response => {
-        setLogin({...login, ...response, data: model, loading: false})
+        const data = response.errors.length ? login.data : model
+        setLogin({...login, ...response, data, loading: false})
         return response
       })
     }
