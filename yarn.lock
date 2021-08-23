@@ -2205,13 +2205,13 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-a-fetch@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.2.2.tgz#348e6cc9e35eadf26d9bd7f5018d540ffaee91a1"
-  integrity sha512-AhhRPL6D5QXGD52pNVp9tOtr3nqrDcobZEUqXGQtUuVYXXo5AehSCFZhcjwhqPqNiuAv8g1cXqRFjTlD78IdcQ==
+a-fetch@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.2.3.tgz#ac8f782e43c3906618ace511d5ff37dec4f68d01"
+  integrity sha512-HOImqSAW4QouToQE2kycYQ01rd74Vgjp+WuWYMbxf7bobetRd7Ljr4hE7NvkGlA12Jf3GTZTI+tbcDg5A7cw7g==
   dependencies:
     axios "^0.21.1"
-    js-expansion "^1.1.4"
+    js-expansion "^1.1.5"
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
@@ -6971,10 +6971,10 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-js-expansion@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.4.tgz#e7a0702d7d23135b2334a89c128df4c22c9b09ab"
-  integrity sha512-lLnxCcgj/seYTNprcT1MST6WceA+8ikHYbo7Ftmnvy5iNrSvgvl/ZbALluiXVanPpCZ59ihlkffTEfSlwmZYBw==
+js-expansion@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.5.tgz#6cf22be643bd634a3091ff836785ac300794eff7"
+  integrity sha512-SbwNkRDDioz3Y2rLyFS1Xw91jGkNpQTXY+6K3QofFaNS7Mg9FMoZdpKDEjAIsICmf+iTskTWPDIl9mUqiqaC9Q==
   dependencies:
     form-data "^4.0.0"
     qs "^6.10.1"
