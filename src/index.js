@@ -16,7 +16,11 @@ class Config {
             append: false,
             skip: !!this._data,
         })
-        const [index, setIndex] = useState({...Fetcher.collection(), data: this._data || Fetcher.collection().data})
+
+        const [index, setIndex] = useState({
+            ...Fetcher.collection(),
+            data: this._data || Fetcher.collection().data
+        })
 
         useEffect(() => {
             if (indexParams.skip) {
@@ -65,12 +69,22 @@ class Config {
     }
 
     store(name, model = {}) {
-        const [store, setStore] = useState({...Fetcher.model(), loading: false, data: model})
+        const [store, setStore] = useState({
+            ...Fetcher.model(),
+            loading: false,
+            data: model,
+            submitting: false,
+        })
 
         const submit = (submitParams = {}) => {
-            setStore({...store, loading: true})
+            setStore({...store, submitting: true})
             return this.Request.store(name, {...store.data, ...submitParams}).then(response => {
-                setStore({...store, ...response, data: response.errors.length ? store.data : model, loading: false})
+                setStore({
+                    ...store,
+                    ...response,
+                    data: response.errors.length ? store.data : model,
+                    submitting: false
+                })
 
                 if (this.setRecords && response.records) {
                     this.setRecords(response.records)
@@ -90,11 +104,15 @@ class Config {
     update(name, model = {}, params = {}) {
         const hasParams = Object.keys(params).length
         const [update, setUpdate] = useState({...Fetcher.model(), loading: hasParams, data: model})
-        const updateData = (data) => setUpdate({...update, loading: false, data: {...update.data, ...data}})
+        const updateData = (data) => setUpdate({
+            ...update,
+            loading: false,
+            submitting: false,
+            data: {...update.data, ...data},
+        })
 
         if (hasParams) {
             useEffect(() => {
-                setUpdate({...update, loading: true})
                 this.Request.show(name, params).then(response => {
                     const data = {}
 
@@ -116,9 +134,9 @@ class Config {
         }
 
         const submit = (submitParams = {}) => {
-            setUpdate({...update, loading: true})
+            setUpdate({...update, submitting: true})
             return this.Request.update(name, {...update.data, ...submitParams}).then(response => {
-                setUpdate({...update, ...response, data: update.data, loading: false})
+                setUpdate({...update, ...response, data: update.data, submitting: false})
 
                 if (this.setRecords && response.records) {
                     this.setRecords(response.records)
@@ -136,12 +154,12 @@ class Config {
     }
 
     delete(name, params = {}) {
-        const [destroy, setDestroy] = useState({loading: false})
+        const [destroy, setDestroy] = useState({loading: false, submitting: false})
 
         const submit = (submitParams = {}) => {
-            setDestroy({loading: true})
+            setDestroy({submitting: true})
             return this.Request.delete(name, {...params, ...submitParams}).then(response => {
-                setDestroy({loading: false})
+                setDestroy({submitting: false})
 
                 if (this.setRecords && response.records) {
                     this.setRecords(response.records)
@@ -158,13 +176,18 @@ class Config {
     }
 
     login(model) {
-        const [login, setLogin] = useState({...Fetcher.model(), loading: false, data: model})
+        const [login, setLogin] = useState({
+            ...Fetcher.model(),
+            loading: false,
+            submitting: false,
+            data: model
+        })
 
         const submit = () => {
-            setLogin({...login, loading: true})
+            setLogin({...login, submitting: true})
             return this.Request.login(login.data).then(response => {
                 const data = response.errors.length ? login.data : model
-                setLogin({...login, ...response, data, loading: false})
+                setLogin({...login, ...response, data, submitting: false})
                 return response
             })
         }
@@ -177,12 +200,17 @@ class Config {
     }
 
     logout(model) {
-        const [logout, setLogout] = useState({...Fetcher.model(), loading: false, data: model})
+        const [logout, setLogout] = useState({
+            ...Fetcher.model(),
+            loading: false,
+            submitting: false,
+            data: model
+        })
 
         const submit = () => {
-            setLogout({...logout, loading: true})
+            setLogout({...logout, submitting: true})
             return this.Request.logout(logout.data).then(response => {
-                setLogout({...logout, ...response, data: model, loading: false})
+                setLogout({...logout, ...response, data: model, submitting: false})
                 return response
             })
         }
