@@ -82,7 +82,7 @@ class Config {
                 setStore({
                     ...store,
                     ...response,
-                    data: response.errors.length ? store.data : model,
+                    data: store.data,
                     submitting: false
                 })
 
@@ -186,8 +186,7 @@ class Config {
         const submit = () => {
             setLogin({...login, submitting: true})
             return this.Request.login(login.data).then(response => {
-                const data = response.errors.length ? login.data : model
-                setLogin({...login, ...response, data, submitting: false})
+                setLogin({...login, ...response, data: login.data, submitting: false})
                 return response
             })
         }
