@@ -2205,13 +2205,13 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-a-fetch@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.2.4.tgz#560ec220abe6f3c6d824925aa0522964fc8f25c0"
-  integrity sha512-qW4GeSLvMAK+P+PL9IVYvSH4vn/6ZZfCwdbFCn99CLuqfOcilgiFzsTLBKoniDFdPpXrAesEeTyvh24q5GNQnA==
+a-fetch@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.2.6.tgz#eff1c0d6df86319f50a8860f663e1a4111749314"
+  integrity sha512-sE48kVb3wFR2OZSAmuG7LmNHeYzVPAgk35pQdk4SNqNIQhANOt0RFbR9+6wT5nkqLlFWRS3+cZwgGGkD0zbvxw==
   dependencies:
     axios "^0.21.1"
-    js-expansion "^1.1.5"
+    js-expansion "^1.1.6"
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
@@ -6971,12 +6971,18 @@ jest@26.6.0:
     import-local "^3.0.2"
     jest-cli "^26.6.0"
 
-js-expansion@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.5.tgz#6cf22be643bd634a3091ff836785ac300794eff7"
-  integrity sha512-SbwNkRDDioz3Y2rLyFS1Xw91jGkNpQTXY+6K3QofFaNS7Mg9FMoZdpKDEjAIsICmf+iTskTWPDIl9mUqiqaC9Q==
+js-cookie@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
+js-expansion@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.6.tgz#7e05f00e0aca17226b2cefe4b69d99999793753f"
+  integrity sha512-ideLHgmXy+dALJUS/egdV7zE2kkCAeI1VWWeF1EBBWx+Xy/TMiDnhpzN9LmlH+B8rakpWm3CHi6hUFRGcS5B1A==
   dependencies:
     form-data "^4.0.0"
+    js-cookie "^3.0.1"
     qs "^6.10.1"
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
