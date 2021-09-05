@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {Fetcher, Router, Client} from 'a-fetch'
 import {get} from 'js-expansion'
+import {Cookies} from 'js-expansion'
 
 class Config {
     constructor(api) {
@@ -186,6 +187,9 @@ class Config {
         const submit = () => {
             setLogin({...login, submitting: true})
             return this.Request.login(login.data).then(response => {
+                if (!response.errors.length) {
+                    Cookies.write('authenticated', true)
+                }
                 setLogin({...login, ...response, data: login.data, submitting: false})
                 return response
             })
@@ -209,6 +213,9 @@ class Config {
         const submit = () => {
             setLogout({...logout, submitting: true})
             return this.Request.logout(logout.data).then(response => {
+                if (!response.errors.length) {
+                    Cookies.clear('authenticated')
+                }
                 setLogout({...logout, ...response, data: model, submitting: false})
                 return response
             })
