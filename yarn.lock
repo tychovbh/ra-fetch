@@ -2205,10 +2205,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-a-fetch@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.2.6.tgz#eff1c0d6df86319f50a8860f663e1a4111749314"
-  integrity sha512-sE48kVb3wFR2OZSAmuG7LmNHeYzVPAgk35pQdk4SNqNIQhANOt0RFbR9+6wT5nkqLlFWRS3+cZwgGGkD0zbvxw==
+a-fetch@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.2.7.tgz#0826751e541cad3e0c51da76b26d20fdf7cf761d"
+  integrity sha512-33TQcFFw0oa670TN+qxt0YwvLwExgF15LBSnJawgZ/p4TvKgRmkiMTn+UkxqX++lswG7NoiTxyHkPqezCU9sTw==
   dependencies:
     axios "^0.21.1"
     js-expansion "^1.1.6"
