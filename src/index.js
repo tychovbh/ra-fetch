@@ -101,6 +101,27 @@ class Config {
         ]
     }
 
+    getData(response, model, data = {})
+    {
+        Object.keys(model).map((name) => {
+            if (this._mapping[name]) {
+                if (typeof this._mapping[name] === 'function') {
+                    data[name] = this._mapping[name](response)
+                } else {
+                    data[name] = get(response, this._mapping[name]) || ''
+                }
+            } else if (response.hasOwnProperty(name)) {
+                if (typeof model[name] === 'object' && Object.keys(model).length > 0) {
+                    data[name] = this.getData(response[name], model[name])
+                } else {
+                    data[name] = response[name]
+                }
+            }
+        })
+
+        return data
+    }
+
     update(name, model = {}, params = {}) {
         const hasParams = Object.keys(params).length
         const [update, setUpdate] = useState({...Fetcher.model(), loading: hasParams, data: model})
@@ -114,21 +135,7 @@ class Config {
         if (hasParams) {
             useEffect(() => {
                 this.Request.show(name, params).then(response => {
-                    const data = {}
-
-                    Object.keys(model).map((name) => {
-                        if (this._mapping[name]) {
-                            if (typeof this._mapping[name] === 'function') {
-                                data[name] = this._mapping[name](response.data)
-                            } else {
-                                data[name] = get(response.data, this._mapping[name]) || ''
-                            }
-                        } else if (response.data.hasOwnProperty(name)) {
-                            data[name] = response.data[name]
-                        }
-                    })
-
-                    updateData(data)
+                    updateData(this.getData(response.data, model))
                 })
             }, [])
         }
