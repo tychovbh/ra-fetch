@@ -190,9 +190,9 @@ class Config {
             data: model
         })
 
-        const submit = () => {
+        const submit = (submitParams = {}) => {
             setLogin({...login, submitting: true})
-            return this.Request.login(login.data).then(response => {
+            return this.Request.login({...login.data, ...submitParams}).then(response => {
                 setLogin({...login, ...response, data: login.data, submitting: false})
                 return response
             })
