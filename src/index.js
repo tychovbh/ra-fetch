@@ -111,7 +111,7 @@ class Config {
                     data[name] = get(response, this._mapping[name]) || ''
                 }
             } else if (response.hasOwnProperty(name)) {
-                if (model[name] && typeof model[name] === 'object' && Object.keys(model).length > 0) {
+                if (model[name] && !Array.isArray(model[name]) &&  typeof model[name] === 'object' && Object.keys(model).length > 0) {
                     data[name] = this.getData(response[name], model[name])
                 } else {
                     data[name] = response[name]
