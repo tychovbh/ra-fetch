@@ -7,10 +7,11 @@ class Config {
         this.Request = api ? Fetcher.api(api) : Fetcher.request()
         this.setRecords = null
         this._mapping = {}
+        this._headers = {}
         this._data = null
     }
 
-    index(name, params = {}) {
+    index(name, params = {}, headers = {}) {
         const [indexParams, setIndexParams] = useState({
             params,
             append: false,
@@ -19,7 +20,7 @@ class Config {
 
         const [index, setIndex] = useState({
             ...Fetcher.collection(),
-            data: this._data || Fetcher.collection().data
+            data: this._data || Fetcher.collection().data,
         })
 
         useEffect(() => {
@@ -28,7 +29,7 @@ class Config {
             }
 
             setIndex({...index, loading: true})
-            this.Request.index(name, indexParams.params).then(response => {
+            this.Request.index(name, indexParams.params, headers || this._headers).then(response => {
                 if (indexParams.append) {
                     response.data = index.data.concat(response.data)
                 }
@@ -50,13 +51,13 @@ class Config {
         ]
     }
 
-    show(name, params = {}) {
+    show(name, params = {}, headers = {}) {
         const [showParams, setShowParams] = useState(params)
         const [show, setShow] = useState(Fetcher.model())
 
         useEffect(() => {
             setShow({...show, loading: true})
-            this.Request.show(name, showParams).then(response => {
+            this.Request.show(name, showParams, headers || this._headers).then(response => {
                 setShow(response)
 
                 if (this.setRecords && response.records) {
@@ -68,7 +69,7 @@ class Config {
         return [show, data => setShow({...show, data}), showParams, setShowParams]
     }
 
-    store(name, model = {}) {
+    store(name, model = {}, headers = {}) {
         const [store, setStore] = useState({
             ...Fetcher.model(),
             loading: false,
@@ -78,20 +79,21 @@ class Config {
 
         const submit = (submitParams = {}) => {
             setStore({...store, submitting: true})
-            return this.Request.store(name, {...store.data, ...submitParams}).then(response => {
-                setStore({
-                    ...store,
-                    ...response,
-                    data: store.data,
-                    submitting: false
+            return this.Request.store(name, {...store.data, ...submitParams}, headers || this._headers)
+                .then(response => {
+                    setStore({
+                        ...store,
+                        ...response,
+                        data: store.data,
+                        submitting: false,
+                    })
+
+                    if (this.setRecords && response.records) {
+                        this.setRecords(response.records)
+                    }
+
+                    return response
                 })
-
-                if (this.setRecords && response.records) {
-                    this.setRecords(response.records)
-                }
-
-                return response
-            })
         }
 
         return [
@@ -101,8 +103,7 @@ class Config {
         ]
     }
 
-    getData(response, model, data = {})
-    {
+    getData(response, model, data = {}) {
         Object.keys(model).map((name) => {
             if (this._mapping[name]) {
                 if (typeof this._mapping[name] === 'function') {
@@ -111,7 +112,12 @@ class Config {
                     data[name] = get(response, this._mapping[name]) || ''
                 }
             } else if (response.hasOwnProperty(name)) {
-                if (model[name] && !Array.isArray(model[name]) &&  typeof model[name] === 'object' && Object.keys(model).length > 0) {
+                if (
+                    model[name] &&
+                    !Array.isArray(model[name]) &&
+                    typeof model[name] === 'object' &&
+                    Object.keys(model).length > 0
+                ) {
                     data[name] = this.getData(response[name], model[name])
                 } else {
                     data[name] = response[name]
@@ -122,7 +128,7 @@ class Config {
         return data
     }
 
-    update(name, model = {}, params = {}) {
+    update(name, model = {}, params = {}, headers = {}) {
         const hasParams = Object.keys(params).length
         const [update, setUpdate] = useState({...Fetcher.model(), loading: hasParams, data: model})
         const updateData = (data) => setUpdate({
@@ -134,7 +140,7 @@ class Config {
 
         if (hasParams) {
             useEffect(() => {
-                this.Request.show(name, params).then(response => {
+                this.Request.show(name, params, headers || this._headers).then(response => {
                     updateData(this.getData(response.data, model))
                 })
             }, [])
@@ -142,7 +148,7 @@ class Config {
 
         const submit = (submitParams = {}) => {
             setUpdate({...update, submitting: true})
-            return this.Request.update(name, {...update.data, ...submitParams}).then(response => {
+            return this.Request.update(name, {...update.data, ...submitParams}, headers || this._headers).then(response => {
                 setUpdate({...update, ...response, data: update.data, submitting: false})
 
                 if (this.setRecords && response.records) {
@@ -160,12 +166,12 @@ class Config {
         ]
     }
 
-    delete(name, params = {}) {
+    delete(name, params = {}, headers = {}) {
         const [destroy, setDestroy] = useState({loading: false, submitting: false})
 
         const submit = (submitParams = {}) => {
             setDestroy({submitting: true})
-            return this.Request.delete(name, {...params, ...submitParams}).then(response => {
+            return this.Request.delete(name, {...params, ...submitParams}, headers || this._headers).then(response => {
                 setDestroy({submitting: false})
 
                 if (this.setRecords && response.records) {
@@ -182,17 +188,17 @@ class Config {
         ]
     }
 
-    login(model) {
+    login(model, headers = {}) {
         const [login, setLogin] = useState({
             ...Fetcher.model(),
             loading: false,
             submitting: false,
-            data: model
+            data: model,
         })
 
         const submit = (submitParams = {}) => {
             setLogin({...login, submitting: true})
-            return this.Request.login({...login.data, ...submitParams}).then(response => {
+            return this.Request.login({...login.data, ...submitParams}, headers || this._headers).then(response => {
                 setLogin({...login, ...response, data: login.data, submitting: false})
                 return response
             })
@@ -205,17 +211,17 @@ class Config {
         ]
     }
 
-    logout(model) {
+    logout(model, headers = {}) {
         const [logout, setLogout] = useState({
             ...Fetcher.model(),
             loading: false,
             submitting: false,
-            data: model
+            data: model,
         })
 
         const submit = () => {
             setLogout({...logout, submitting: true})
-            return this.Request.logout(logout.data).then(response => {
+            return this.Request.logout(logout.data, headers || this._headers).then(response => {
                 setLogout({...logout, ...response, data: model, submitting: false})
                 return response
             })
@@ -241,6 +247,11 @@ class Config {
 
     mapping(mapping = {}) {
         this._mapping = mapping
+        return this
+    }
+
+    headers(headers = {}) {
+        this._headers = headers
         return this
     }
 
@@ -275,32 +286,36 @@ export const useMapping = (mapping = {}) => {
     return new Config().mapping(mapping)
 }
 
-export const useIndex = (name, params = {}) => {
-    return new Config().index(name, params)
+export const useHeaders = (headers = {}) => {
+    return new Config().headers(headers)
 }
 
-export const useShow = (name, params = {}) => {
-    return new Config().show(name, params)
+export const useIndex = (name, params = {}, headers = {}) => {
+    return new Config().index(name, params, headers)
 }
 
-export const useStore = (name, model = {}) => {
-    return new Config().store(name, model)
+export const useShow = (name, params = {}, headers = {}) => {
+    return new Config().show(name, params, headers)
 }
 
-export const useUpdate = (name, model = {}, params = {}) => {
-    return new Config().update(name, model, params)
+export const useStore = (name, model = {}, headers = {}) => {
+    return new Config().store(name, model, headers)
 }
 
-export const useDelete = (name, params = {}) => {
-    return new Config().delete(name, params)
+export const useUpdate = (name, model = {}, params = {}, headers = {}) => {
+    return new Config().update(name, model, params, headers)
 }
 
-export const useLogin = (model = {}) => {
-    return new Config().login(model)
+export const useDelete = (name, params = {}, headers = {}) => {
+    return new Config().delete(name, params, headers)
 }
 
-export const useLogout = (model = {}) => {
-    return new Config().logout(model)
+export const useLogin = (model = {}, headers = {}) => {
+    return new Config().login(model, headers)
+}
+
+export const useLogout = (model = {}, headers = {}) => {
+    return new Config().logout(model, headers)
 }
 
 export {Fetcher, Router, Client}
