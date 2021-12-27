@@ -51,7 +51,7 @@
     "dist"
   ],
   "dependencies": {
-    "a-fetch": "^1.2.8",
+    "a-fetch": "^1.2.9",
     "js-expansion": "^1.1.6"
   }
 }
