@@ -239,9 +239,9 @@ class Config {
         return this
     }
 
-    records(setRecords = null, records = [], key = 'id') {
+    records(setRecords = null, records = [], value_key = 'id', records_key = 'id') {
         this.setRecords = setRecords
-        this.Request.records(records, key)
+        this.Request.records(records, value_key, records_key)
         return this
     }
 
