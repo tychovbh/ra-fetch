@@ -4,26 +4,11 @@
 
 [![NPM](https://img.shields.io/npm/v/ra-fetch.svg)](https://www.npmjs.com/package/ra-fetch) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
+ra-fetch is the perfect tool for defining API routes and requesting them when needed, in a very clean way. We support al request types like `GET`, `POST`, `PUT` and `DELETE`.
 
-```bash
-npm install --save ra-fetch
-```
+<img src="https://a-fetch.nl/img/ra-fetch.png" />
 
-## Usage
-
-```jsx
-import React, { Component } from 'react'
-
-import MyComponent from 'ra-fetch'
-import 'ra-fetch/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
-```
+>Read the full documentation here: [https://a-fetch.nl/#/react](https://a-fetch.nl/#/ra-fetch)
 
 ## License
 
