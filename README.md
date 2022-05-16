@@ -8,7 +8,7 @@ ra-fetch is the perfect tool for defining API routes and requesting them when ne
 
 <img src="https://a-fetch.nl/img/ra-fetch.png" />
 
->Read the full documentation here: [https://a-fetch.nl/#/react](https://a-fetch.nl/#/ra-fetch)
+>Read the full documentation here: [https://a-fetch.nl/#/react](https://a-fetch.nl/#/react)
 
 ## License
 
