@@ -2205,13 +2205,13 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-a-fetch@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.3.2.tgz#5e1c5e8f4025d59c3d6e5bf63b8806756d45df35"
-  integrity sha512-8o9Xnt4eHlZCFx3s+f9ovD4zLJWB7q43xfcz4IcEiqe9cLHqTyQ3L8U29BWAi8DLaFDnYTC7J0OKV6UiAM0MRw==
+a-fetch@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.3.3.tgz#7bdf34d8025cf29ab19bac1a3afaf4e693472337"
+  integrity sha512-CsMZYBFgCrGeRU523pICXBUNkXo4PBhdttvdCLsrjLGqsNbiEYdPPGc9zonEm9mI1tIsINRowp7BJl6B1L6Pag==
   dependencies:
     axios "^0.21.1"
-    js-expansion "^1.1.10"
+    js-expansion "^1.1.11"
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
@@ -6976,10 +6976,10 @@ js-cookie@^3.0.1:
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
   integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
 
-js-expansion@^1.1.10:
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.10.tgz#dfb79912fdb6a809dee0e221ba597f64b8a2c84d"
-  integrity sha512-lEHioR22kMVDkLnk15Kj+FSbP98uNAT9LsiXT/2DQ/dIfcy7MiHDq9JfRaNMmW/OST78M/V3RSVwf4QELb/AlQ==
+js-expansion@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.11.tgz#51555691c8bc949fc0eb28791f095eb5de93c381"
+  integrity sha512-DIDosXlRY4uuVlcsjYaYAAsmXaLSppHN63U+pwqnxlbIbRAA70GCOQ4DajMOETFp6rKscRuBZD7l+mrzmySzsQ==
   dependencies:
     form-data "^4.0.0"
     js-cookie "^3.0.1"
