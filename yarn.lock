@@ -2205,13 +2205,13 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-a-fetch@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.3.0.tgz#b90155bf55b07e3da86459b0efb314db42c5dc36"
-  integrity sha512-EeGN9PgR8mbiDOmB0XdDxA/EAE1jmiGzuhCtlIpRQSn69pcgjll8ShdKNu3DXwfmXmSYxIPRhvtOt53GYj/HCQ==
+a-fetch@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/a-fetch/-/a-fetch-1.3.1.tgz#593ab918e50456a2103da8116b9e0f4963ae2c4b"
+  integrity sha512-sa1p+kEwPvZfb5NbJQP8lTP9o0RHtL+z7sBmHvRxYGDcUCh/cBfulAlsCXs2ZvqPctIXP4CGwVXlyyfXh+FpQg==
   dependencies:
     axios "^0.21.1"
-    js-expansion "^1.1.6"
+    js-expansion "^1.1.10"
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
@@ -6976,19 +6976,10 @@ js-cookie@^3.0.1:
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
   integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
 
-js-expansion@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.6.tgz#7e05f00e0aca17226b2cefe4b69d99999793753f"
-  integrity sha512-ideLHgmXy+dALJUS/egdV7zE2kkCAeI1VWWeF1EBBWx+Xy/TMiDnhpzN9LmlH+B8rakpWm3CHi6hUFRGcS5B1A==
-  dependencies:
-    form-data "^4.0.0"
-    js-cookie "^3.0.1"
-    qs "^6.10.1"
-
-js-expansion@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.7.tgz#57ffb7824a20cae544611c4b86ab97de5bbe74a0"
-  integrity sha512-wzRIxWxdWPPHn+vLaGoI9JoyEtDrl/qfkixfuz6YjtowGehaAydTkd+16fduJB1aben3kBXcYf6bF2reXZ8h1g==
+js-expansion@^1.1.10:
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/js-expansion/-/js-expansion-1.1.10.tgz#dfb79912fdb6a809dee0e221ba597f64b8a2c84d"
+  integrity sha512-lEHioR22kMVDkLnk15Kj+FSbP98uNAT9LsiXT/2DQ/dIfcy7MiHDq9JfRaNMmW/OST78M/V3RSVwf4QELb/AlQ==
   dependencies:
     form-data "^4.0.0"
     js-cookie "^3.0.1"
