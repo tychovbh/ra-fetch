@@ -78,7 +78,7 @@ class Config {
         })
 
         const submit = (submitParams = {}) => {
-            setStore({...store, submitting: true})
+            setStore({...store, errors: [], submitting: true})
             return this.Request.store(name, {...store.data, ...submitParams}, headers || this._headers)
                 .then(response => {
                     setStore({
@@ -147,7 +147,7 @@ class Config {
         }
 
         const submit = (submitParams = {}) => {
-            setUpdate({...update, submitting: true})
+            setUpdate({...update, errors: [], submitting: true})
             return this.Request.update(name, {...update.data, ...submitParams}, headers || this._headers).then(response => {
                 setUpdate({...update, ...response, data: update.data, submitting: false})
 
