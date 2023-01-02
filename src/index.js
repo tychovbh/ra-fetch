@@ -84,7 +84,7 @@ class Config {
                     setStore({
                         ...store,
                         ...response,
-                        errors: response.errors  || [],
+                        errors: response.errors || [],
                         data: store.data,
                         submitting: false,
                     })
@@ -101,11 +101,11 @@ class Config {
             store,
             (data, errors = null) => setStore({
                 ...store,
-                errors: errors || store.errors,
+                errors: errors === null ? store.errors : errors,
                 data: {
                     ...store.data,
-                    ...data
-                }
+                    ...data,
+                },
             }),
             submit,
         ]
@@ -143,7 +143,7 @@ class Config {
             ...update,
             loading: false,
             submitting: false,
-            errors: errors || update.errors,
+            errors: errors === null ? update.errors : errors,
             data: {...update.data, ...data},
         })
 
@@ -163,7 +163,7 @@ class Config {
                     ...response,
                     errors: response.errors || [],
                     data: update.data,
-                    submitting: false
+                    submitting: false,
                 })
 
                 if (this.setRecords && response.records) {
