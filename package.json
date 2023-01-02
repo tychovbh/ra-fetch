@@ -1,6 +1,6 @@
 {
   "name": "ra-fetch",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "description": "React hooks to fetch your API",
   "author": "tychovbh",
   "license": "MIT",
