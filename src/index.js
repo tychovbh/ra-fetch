@@ -101,7 +101,7 @@ class Config {
             store,
             (data, errors = null) => setStore({
                 ...store,
-                errors: errors === null ? store.errors : errors,
+                errors: Array.isArray(errors) ? errors : store.errors,
                 data: {
                     ...store.data,
                     ...data,
@@ -143,7 +143,7 @@ class Config {
             ...update,
             loading: false,
             submitting: false,
-            errors: errors === null ? update.errors : errors,
+            errors: Array.isArray(errors) ? errors : update.errors,
             data: {...update.data, ...data},
         })
 
