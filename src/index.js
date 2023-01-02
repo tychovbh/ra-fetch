@@ -99,7 +99,14 @@ class Config {
 
         return [
             store,
-            (data) => setStore({...store, data: {...store.data, ...data}}),
+            (data, errors = null) => setStore({
+                ...store,
+                errors: errors || store.errors,
+                data: {
+                    ...store.data,
+                    ...data
+                }
+            }),
             submit,
         ]
     }
@@ -132,10 +139,11 @@ class Config {
     update(name, model = {}, params = {}, headers = {}) {
         const hasParams = Object.keys(params).length
         const [update, setUpdate] = useState({...Fetcher.model(), loading: hasParams, data: model})
-        const updateData = (data) => setUpdate({
+        const updateData = (data, errors = null) => setUpdate({
             ...update,
             loading: false,
             submitting: false,
+            errors: errors || update.errors,
             data: {...update.data, ...data},
         })
 
