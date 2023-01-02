@@ -48,11 +48,16 @@ export default function App() {
     function fetchWithCookieToken() {
         console.log(Cookies.read('token'))
         Fetcher.index('todos').then(response => {
-            
+
         })
     }
 
+    console.log('here', storeTodo.errors)
     return <div>
+        <button onClick={() => setStoreTodo(storeTodo.data, [{message: 'test'}])}>add error</button>
+        <button onClick={() => setStoreTodo(storeTodo.data, [])}>remove errors</button>
+        <br/>
+        <br/>
         <button onClick={fetchWithCookieToken}>fetch with cookie token</button>
         <br/>
         <button onClick={() => setParams({userId: 2}, true)}>todos users 2</button>
