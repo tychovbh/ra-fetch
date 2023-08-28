@@ -79,13 +79,14 @@ class Config {
 
         const submit = (submitParams = {}) => {
             setStore({...store, submitting: true})
-            return this.Request.store(name, {...store.data, ...submitParams}, headers || this._headers)
+            const data = {...store.data, ...submitParams}
+            return this.Request.store(name, data, headers || this._headers)
                 .then(response => {
                     setStore({
                         ...store,
                         ...response,
                         errors: response.errors || [],
-                        data: store.data,
+                        data,
                         submitting: false,
                     })
 
@@ -157,12 +158,13 @@ class Config {
 
         const submit = (submitParams = {}) => {
             setUpdate({...update, errors: [], submitting: true})
-            return this.Request.update(name, {...update.data, ...submitParams}, headers || this._headers).then(response => {
+            const data = {...update.data, ...submitParams}
+            return this.Request.update(name, data, headers || this._headers).then(response => {
                 setUpdate({
                     ...update,
                     ...response,
                     errors: response.errors || [],
-                    data: update.data,
+                    data,
                     submitting: false,
                 })
 
