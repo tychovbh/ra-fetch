@@ -86,7 +86,7 @@ class Config {
                         ...store,
                         ...response,
                         errors: response.errors || [],
-                        data: {...data, ...response.data},
+                        data: {...data, ...this.getData(response.data, model)},
                         submitting: false,
                     })
 
@@ -164,7 +164,7 @@ class Config {
                     ...update,
                     ...response,
                     errors: response.errors || [],
-                    data: {...data, ...response.data},
+                    data: {...data, ...this.getData(response.data, model)},
                     submitting: false,
                 })
 
