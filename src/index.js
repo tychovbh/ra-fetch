@@ -87,7 +87,7 @@ class Config {
                         ...store,
                         ...response,
                         errors,
-                        data: response.errors.length ? {...data} :{...data, ...this.getData(response.data, model)},
+                        data: errors.length ? {...data} : {...data, ...this.getData(response.data, model)},
                         submitting: false,
                     })
 
@@ -161,11 +161,12 @@ class Config {
             setUpdate({...update, errors: [], submitting: true})
             const data = {...update.data, ...submitParams}
             return this.Request.update(name, data, headers || this._headers).then(response => {
+                const errors = response.errors || []
                 setUpdate({
                     ...update,
                     ...response,
-                    errors: response.errors || [],
-                    data: {...data, ...this.getData(response.data, model)},
+                    errors,
+                    data: errors.length ? {...data} : {...data, ...this.getData(response.data, model)},
                     submitting: false,
                 })
 
