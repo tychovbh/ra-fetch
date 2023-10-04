@@ -82,11 +82,12 @@ class Config {
             const data = {...store.data, ...submitParams}
             return this.Request.store(name, data, headers || this._headers)
                 .then(response => {
+                    const errors = response.errors || []
                     setStore({
                         ...store,
                         ...response,
-                        errors: response.errors || [],
-                        data: {...data, ...this.getData(response.data, model)},
+                        errors,
+                        data: response.errors.length ? {...data} :{...data, ...this.getData(response.data, model)},
                         submitting: false,
                     })
 
