@@ -139,7 +139,7 @@ class Config {
     }
 
     update(name, model = {}, params = {}, headers = {}) {
-        const hasParams = Object.keys(params).length
+        const hasParams = Boolean(Object.keys(params).length)
         const [update, setUpdate] = useState({...Fetcher.model(), loading: hasParams, data: model})
         const updateData = (data, errors = null) => setUpdate({
             ...update,
